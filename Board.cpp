@@ -28,7 +28,7 @@ void Board::board_size_update(unsigned int row, unsigned int col, unsigned int s
 
 void Board::post(unsigned int row, unsigned int col, Direction vector, const string &str)
 {
-    //board_size_update(row, col, str.length());
+    board_size_update(row, col, str.length());
 
     uint s = 0;
     while (s < str.length())
