@@ -5,30 +5,25 @@
 using namespace std;
 using namespace ariel;
 
-// used for shoe the board
-void Board::board_size_update(uint row, uint col, uint str_len)
+// used for show the board, detrmin the show size
+void Board::board_size_update(uint row, uint col, uint str_len, Direction vector)
 {
-    if (Board::min_row > row)
+        Board::min_col = min(col,Board::min_col);
+        Board::min_row = min(row,Board::min_row);
+if( Direction::Horizontal==vector)
     {
-        Board::min_row = row;
+        Board::max_col = max(col + str_len-1,Board::max_col);
+        Board::max_row = max(row,Board::max_row);
     }
-    if (Board::max_row < row + str_len-1)
-    {
-        Board::max_row = row + str_len-1;
-    }
-    if (Board::min_col > col)
-    {
-        Board::min_col = col;
-    }
-    if (Board::max_col < col + str_len-1)
-    {
-        Board::max_col = col + str_len-1;
+    else{
+        Board::max_col = max(col,Board::max_col);   
+        Board::max_row = max(row + str_len-1,Board::max_row);
     }
 }
-
+//post function
 void Board::post(uint row, uint col, Direction vector, const string &str)
 {
-    board_size_update(row, col, str.length());
+    board_size_update(row, col, str.length(),vector);
 
     uint s = 0;
     while (s < str.length())
@@ -46,6 +41,7 @@ void Board::post(uint row, uint col, Direction vector, const string &str)
         s++;
     }
 }
+//read function
 string Board::read(uint row, uint col, Direction vector, uint len)
 {
     string str;
@@ -72,11 +68,12 @@ string Board::read(uint row, uint col, Direction vector, uint len)
     }
     return str;
 }
+//show function
 void Board::show()
 {
-    for (uint row = min_row - 1; row < max_row; row++)
+    for (uint row = min_row - 1; row <= max_row+1; row++)
     {
-        for (uint col = min_col - 1; col < max_col; col++)
+        for (uint col = min_col - 1; col <= max_col+1; col++)
         {
             if (Board::theBoard[row][col] == 0)
             {

@@ -27,6 +27,6 @@ namespace ariel
         void post(uint row, uint col, Direction vector, const string &str);
         string read(uint row, uint col, Direction vector, uint len);
         void show();
-        void board_size_update( uint row,  uint col,  uint str_len);
+        void board_size_update( uint row,  uint col,  uint str_len,Direction vector);
     };
 }
